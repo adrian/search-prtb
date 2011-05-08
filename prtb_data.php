@@ -1,7 +1,7 @@
 <?php
-	ini_set("log_errors" , "1");
-	ini_set("error_log" , "/tmp/php.log");
-	ini_set("display_errors" , "0");
+	//ini_set("log_errors" , "1");
+	//ini_set("error_log" , "/tmp/php.log");
+	//ini_set("display_errors" , "0");
 
 	/*
 	 * Script:    DataTables server-side script for PHP and MySQL
@@ -29,7 +29,7 @@
 	$gaSql['password']   = "prtb";
 	$gaSql['db']         = "prtb";
 	$gaSql['server']     = "localhost";
-	
+
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * If you just want to use the basic configuration for DataTables with PHP server-side, there is
@@ -40,10 +40,10 @@
 	 * MySQL connection
 	 */
 	$gaSql['link'] =  mysql_pconnect( $gaSql['server'], $gaSql['user'], $gaSql['password']  ) or
-		die( 'Could not open connection to server' );
+		die( 'Could not open connection to server' . ' -> ' . mysql_error());
 	
 	mysql_select_db( $gaSql['db'], $gaSql['link'] ) or 
-		die( 'Could not select database '. $gaSql['db'] );
+		die( 'Could not select database '. $gaSql['db'] . ' -> ' . mysql_error());
 	
 	
 	/* 
@@ -128,7 +128,7 @@
 		$sLimit
 	";
 
-	error_log($sQuery);
+	//error_log($sQuery);
 
 	$rResult = mysql_query( $sQuery, $gaSql['link'] ) or die(mysql_error());
 	

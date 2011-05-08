@@ -13,12 +13,22 @@
 		
     <script type="text/javascript" charset="utf-8">
       $(document).ready(function() {
-        $('#registrations').dataTable( {
-          "bProcessing": true,
-          "bServerSide": true,
-          "sAjaxSource": "prtb_data.php"
-        } );
-      } );
+          var oTable = $('#registrations').dataTable({
+              "bProcessing": true,
+              "bServerSide": true,
+              "sAjaxSource": "prtb_data.php",
+              "sPaginationType": "full_numbers",
+              "sScrollX": "100%",
+              "bScrollCollapse": true
+          });
+
+          $("#county_select").change(function() {
+              oTable.fnFilter($(this).val(), 5);
+          });
+          $("#type_select").change(function() {
+              oTable.fnFilter($(this).val(), 6);
+          });
+      });
     </script>
 
   </head>
@@ -26,19 +36,6 @@
   <body>
 
     <div class="dataTables_wrapper">
-
-      <!--<div id="registrations_length" class="dataTables_length">
-        Show <select name="registrations_length" size="1">
-          <option value="10">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select> entries
-      </div>
-
-      <div id="registrations_filter" class="dataTables_filter">
-        Search: <input type="text">
-      </div>-->
 
       <div id="registrations_processing" class="dataTables_processing" style="visibility: hidden;">Processing...</div>
 
@@ -69,8 +66,65 @@
             <th>Address 3</th>
             <th>Address 4</th>
             <th>Address 5</th>
-            <th>County</th>
-            <th>Type</th>
+            <th>
+<select id="county_select">
+  <option value=""></option>
+  <option value="Carlow">Carlow</option>
+  <option value="Cavan">Cavan</option>
+  <option value="Clare">Clare</option>
+  <option value="Cork">Cork</option>
+  <option value="Donegal">Donegal</option>
+  <option value="Dublin 10">Dublin 10</option>
+  <option value="Dublin 11">Dublin 11</option>
+  <option value="Dublin 12">Dublin 12</option>
+  <option value="Dublin 13">Dublin 13</option>
+  <option value="Dublin 14">Dublin 14</option>
+  <option value="Dublin 15">Dublin 15</option>
+  <option value="Dublin 16">Dublin 16</option>
+  <option value="Dublin 17">Dublin 17</option>
+  <option value="Dublin 18">Dublin 18</option>
+  <option value="Dublin 1">Dublin 1</option>
+  <option value="Dublin 20">Dublin 20</option>
+  <option value="Dublin 22">Dublin 22</option>
+  <option value="Dublin 24">Dublin 24</option>
+  <option value="Dublin 2">Dublin 2</option>
+  <option value="Dublin 3">Dublin 3</option>
+  <option value="Dublin 4">Dublin 4</option>
+  <option value="Dublin 5">Dublin 5</option>
+  <option value="Dublin 6W">Dublin 6W</option>
+  <option value="Dublin 7">Dublin 7</option>
+  <option value="Dublin 8">Dublin 8</option>
+  <option value="Dublin 9">Dublin 9</option>
+  <option value="Dublin">Dublin</option>
+  <option value="Galway">Galway</option>
+  <option value="Kerry">Kerry</option>
+  <option value="Kildare">Kildare</option>
+  <option value="Kilkenny">Kilkenny</option>
+  <option value="Laois">Laois</option>
+  <option value="Leitrim">Leitrim</option>
+  <option value="Limerick">Limerick</option>
+  <option value="Longford">Longford</option>
+  <option value="Louth">Louth</option>
+  <option value="Mayo">Mayo</option>
+  <option value="Meath">Meath</option>
+  <option value="Monaghan">Monaghan</option>
+  <option value="Offaly">Offaly</option>
+  <option value="Roscommon">Roscommon</option>
+  <option value="Sligo">Sligo</option>
+  <option value="Tipperary">Tipperary</option>
+  <option value="Waterford">Waterford</option>
+  <option value="Westmeath">Westmeath</option>
+  <option value="Wexford">Wexford</option>
+</select>
+            </th>
+            <th>
+<select id="type_select">
+  <option value=""></option>
+  <option value="Semi-Detached House">Semi-Detached House</option>
+  <option value="Detached House">Detached House</option>
+  <option value="Terraced House">Terraced House</option>
+</select>
+            </th>
             <th>Bedrooms</th>
             <th>Bed Spaces</th>
             <th>Floor Space</th>
