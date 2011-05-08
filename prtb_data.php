@@ -1,4 +1,8 @@
 <?php
+	ini_set("log_errors" , "1");
+	ini_set("error_log" , "/tmp/php.log");
+	ini_set("display_errors" , "0");
+
 	/*
 	 * Script:    DataTables server-side script for PHP and MySQL
 	 * Copyright: 2010 - Allan Jardine
@@ -123,6 +127,9 @@
 		$sOrder
 		$sLimit
 	";
+
+	error_log($sQuery);
+
 	$rResult = mysql_query( $sQuery, $gaSql['link'] ) or die(mysql_error());
 	
 	/* Data set length after filtering */
