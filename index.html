@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PRTB</title>
+
+    <style type="text/css">
+      @import "datatables/media/css/demo_page.css";
+      @import "datatables/media/css/demo_table.css";
+    </style>
+
+    <script type="text/javascript" language="javascript" src="datatables/media/js/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="datatables/media/js/jquery.dataTables.js"></script>
+		
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        $('#registrations').dataTable( {
+          "bProcessing": true,
+          "bServerSide": true,
+          "sAjaxSource": "prtb_data.php"
+        } );
+      } );
+    </script>
+
+  </head>
+
+  <body>
+
+    <div class="dataTables_wrapper">
+
+      <!--<div id="registrations_length" class="dataTables_length">
+        Show <select name="registrations_length" size="1">
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select> entries
+      </div>
+
+      <div id="registrations_filter" class="dataTables_filter">
+        Search: <input type="text">
+      </div>-->
+
+      <div id="registrations_processing" class="dataTables_processing" style="visibility: hidden;">Processing...</div>
+
+      <table cellspacing="0" cellpadding="0" border="0" id="registrations" class="display">
+        <thead>
+          <tr>
+            <th>Address 1</th>
+            <th>Address 2</th>
+            <th>Address 3</th>
+            <th>Address 4</th>
+            <th>Address 5</th>
+            <th>County</th>
+            <th>Type</th>
+            <th>Bedrooms</th>
+            <th>Bed Spaces</th>
+            <th>Floor Space</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="10" class="dataTables_empty">Loading data from server</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Address 1</th>
+            <th>Address 2</th>
+            <th>Address 3</th>
+            <th>Address 4</th>
+            <th>Address 5</th>
+            <th>County</th>
+            <th>Type</th>
+            <th>Bedrooms</th>
+            <th>Bed Spaces</th>
+            <th>Floor Space</th>
+          </tr>
+        </tfoot>
+      </table>
+
+    </div>
+
+  </body>
+</html>
+
