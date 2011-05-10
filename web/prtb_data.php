@@ -25,10 +25,10 @@
 	$sTable = "registrations";
 	
 	/* Database connection information */
-	$gaSql['user']       = "prtb";
-	$gaSql['password']   = "prtb";
-	$gaSql['db']         = "prtb";
-	$gaSql['server']     = "localhost";
+	$gaSql['user']       = "@db.user@";
+	$gaSql['password']   = "@db.pass@";
+	$gaSql['db']         = "@db.name@";
+	$gaSql['server']     = "@db.internal.host@";
 
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -82,20 +82,14 @@
 	
 	/* 
 	 * Filtering
-	 * NOTE this does not match the built-in DataTables filtering which does it
-	 * word by word on any field. It's possible to do here, but concerned about efficiency
-	 * on very large tables, and MySQL's regex functionality is very limited
 	 */
 	$sWhere = "";
 	if ( $_GET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE (";
-		for ( $i=0 ; $i<count($aColumns) ; $i++ )
-		{
-			$sWhere .= $aColumns[$i]." LIKE '%".mysql_real_escape_string( $_GET['sSearch'] )."%' OR ";
-		}
-		$sWhere = substr_replace( $sWhere, "", -3 );
-		$sWhere .= ')';
+
+		$sWhere = "WHERE MATCH (address1, address2, address3, address4, address5) AGAINST ('";
+		$sWhere .= mysql_real_escape_string( $_GET['sSearch'] );
+		$sWhere .= "' IN BOOLEAN MODE)";
 	}
 	
 	/* Individual column filtering */
@@ -111,7 +105,7 @@
 			{
 				$sWhere .= " AND ";
 			}
-			$sWhere .= $aColumns[$i]." LIKE '%".mysql_real_escape_string($_GET['sSearch_'.$i])."%' ";
+			$sWhere .= $aColumns[$i]." = '".mysql_real_escape_string($_GET['sSearch_'.$i])."' ";
 		}
 	}
 	
