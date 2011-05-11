@@ -1,0 +1,48 @@
+<project name="prtb-search" default="get-customers" basedir=".">
+
+    <property file="build.properties"/>
+    <property name="publish.dir" value="publish"/>
+    <property name="src.dir" value="web"/>
+
+    <target name="clean">
+       <delete dir="${publish.dir}"/>
+    </target>
+
+    <target name="prepare">
+        <mkdir dir="${publish.dir}"/>
+
+        <copy file="${src.dir}\prtb_data.php" toDir="${publish.dir}" overwrite="true">
+            <filterset begintoken="@" endtoken="@">
+                <filtersfile file="build.properties"/>
+            </filterset>
+        </copy>
+
+        <copy toDir="${publish.dir}" preservelastmodified="true">
+            <fileset dir="${src.dir}"/>
+        </copy>
+    </target>
+
+    <target name="publish" depends="prepare">
+        <ftp server="${ftp.server}"
+             userid="${ftp.userid}"
+           password="${ftp.password}"
+          remotedir="/webspace/httpdocs/17od.com/prtb/"
+             action="put"
+            passive="yes"
+            depends="yes"
+       timediffauto="true"
+             binary="yes">
+            <fileset dir="${publish.dir}"/>
+        </ftp>
+    </target>
+
+    <target name="import-registrations">
+        <sql driver="com.mysql.jdbc.Driver"
+                url="jdbc:mysql://${db.external.host}/${db.name}"
+             userid="${db.user}"
+           password="${db.pass}"
+                src="registrations.sql"/>
+    </target>
+
+</project>
+
