@@ -1,4 +1,4 @@
-<project name="prtb-search" default="get-customers" basedir=".">
+<project name="search-prtb" default="prepare" basedir=".">
 
     <property file="build.properties"/>
     <property name="publish.dir" value="publish"/>
