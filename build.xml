@@ -18,7 +18,7 @@
         </copy>
 
         <copy toDir="${publish.dir}" preservelastmodified="true">
-            <fileset dir="${src.dir}"/>
+            <fileset dir="${src.dir}" excludes="prtb_data.php"/>
         </copy>
     </target>
 
